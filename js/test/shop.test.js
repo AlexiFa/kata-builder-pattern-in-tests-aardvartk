@@ -4,8 +4,6 @@ const Address = require('../address')
 const Shop = require('../shop')
 const UserBuilder = require('../userBuilder')
 
-const parisAddress = new Address("33 quai d'Orsay", "", "Paris", "75007", "France")
-
 test('happy path', t => {
     const user = new UserBuilder("Bob").build()
 
@@ -16,7 +14,7 @@ test('happy path', t => {
 
 test('minor users cannot order from the shop', t => {
     const user = new UserBuilder("Bob")
-        .setAge(16)
+        .minor()
         .build()
 
     t.false(Shop.canOrder(user))
@@ -25,7 +23,7 @@ test('minor users cannot order from the shop', t => {
 
 test('must be a verified user to order from the shop', t => {
     const user = new UserBuilder("Bob")
-        .setVerified(false)
+        .notVerified()
         .build()
 
     t.false(Shop.canOrder(user))
@@ -34,7 +32,7 @@ test('must be a verified user to order from the shop', t => {
 
 test('foreigners must pay foreign fee', t => {
     const user = new UserBuilder("Bob")
-        .setAddress(parisAddress)
+        .foreign()
         .build()
 
     t.true(Shop.mustPayForeignFee(user))
