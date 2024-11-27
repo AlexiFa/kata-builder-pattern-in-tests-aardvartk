@@ -2,10 +2,8 @@ const test = require('tape')
 
 const Address = require('../address')
 const Shop = require('../shop')
-const User = require('../user')
 const UserBuilder = require('../userBuilder')
 
-const fsfAddress = new Address("51 Franklin Street", "Fifth Floor", "Boston", "02110", "USA")
 const parisAddress = new Address("33 quai d'Orsay", "", "Paris", "75007", "France")
 
 test('happy path', t => {

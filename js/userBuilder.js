@@ -28,7 +28,7 @@ class UserBuilder {
         if (this.age === null) {
             throw new Error("age is required")
         }
-        return new User("Bob").setAge(this.age).setVerified(this.verified).setAddress(this.address)
+        return new User(this.name, this.age, this.verified, this.address)
     }
 }
 
