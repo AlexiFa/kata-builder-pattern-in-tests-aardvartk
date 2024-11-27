@@ -23,7 +23,7 @@ test('minor users cannot order from the shop', t => {
 })
 
 test('must be a verified user to order from the shop', t => {
-    const user = new User({ name: "Bob", "email": "bob@domain.tld", age: 16, address: fsfAddress, verified: false })
+    const user = new User({ name: "Bob", "email": "bob@domain.tld", age: 20, address: fsfAddress, verified: false })
 
     t.false(Shop.canOrder(user))
     t.end()
