@@ -3,12 +3,13 @@ const test = require('tape')
 const Address = require('../address')
 const Shop = require('../shop')
 const User = require('../user')
+const UserBuilder = require('../userBuilder')
 
 const fsfAddress = new Address("51 Franklin Street", "Fifth Floor", "Boston", "02110", "USA")
 const parisAddress = new Address("33 quai d'Orsay", "", "Paris", "75007", "France")
 
 test('happy path', t => {
-    const user = new User("Bob").build()
+    const user = new UserBuilder("Bob").build()
 
     t.true(Shop.canOrder(user))
     t.false(Shop.mustPayForeignFee(user))
@@ -16,7 +17,7 @@ test('happy path', t => {
 })
 
 test('minor users cannot order from the shop', t => {
-    const user = new User("Bob")
+    const user = new UserBuilder("Bob")
         .setAge(16)
         .build()
 
@@ -25,7 +26,7 @@ test('minor users cannot order from the shop', t => {
 })
 
 test('must be a verified user to order from the shop', t => {
-    const user = new User("Bob")
+    const user = new UserBuilder("Bob")
         .setVerified(false)
         .build()
 
@@ -34,7 +35,7 @@ test('must be a verified user to order from the shop', t => {
 })
 
 test('foreigners must pay foreign fee', t => {
-    const user = new User("Bob")
+    const user = new UserBuilder("Bob")
         .setAddress(parisAddress)
         .build()
 

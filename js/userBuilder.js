@@ -1,9 +1,12 @@
-class User {
+const Address = require('./address')
+const User = require('./user')
+
+class UserBuilder {
     constructor(name) {
         this.name = name
-        this.age = null
-        this.verified = null
-        this.address = null
+        this.age = 25
+        this.verified = true
+        this.address = new Address("51 Franklin Street", "Fifth Floor", "Boston", "02110", "USA")
     }
 
     setAge(age) {
@@ -25,8 +28,8 @@ class User {
         if (this.age === null) {
             throw new Error("age is required")
         }
-        return this
+        return new User("Bob").setAge(this.age).setVerified(this.verified).setAddress(this.address)
     }
 }
 
-module.exports = User
+module.exports = UserBuilder
